@@ -1,0 +1,113 @@
+/* 1. Design tokens: replace with colors/fonts from your reference design */
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --text: #1f2933;
+  --muted: #52606d;
+  --bg: #ffffff;
+  --surface: #f5f7fa;
+  --radius: 12px;
+  --gap: 2rem;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* 2. Base */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+body { margin: 0; overflow-wrap: break-word; font-family: var(--font); color: var(--text); background: var(--bg); line-height: 1.6; }
+img { max-width: 100%; height: auto; display: block; }
+h1, h2, h3 { line-height: 1.2; margin: 0 0 .75rem; }
+p { margin: 0 0 1rem; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; margin: 0; padding: 0; }
+.container { max-width: 1140px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* 3. Buttons */
+.btn {
+  display: inline-block; padding: .8rem 1.6rem; border-radius: 8px;
+  background: var(--primary); color: #fff; font-weight: 600;
+  border: 2px solid var(--primary);
+}
+.btn:hover { background: var(--primary-dark); border-color: var(--primary-dark); }
+.btn-outline { background: transparent; color: var(--primary); }
+.btn-outline:hover { background: var(--primary); color: #fff; }
+.btn-small { padding: .5rem 1.1rem; }
+.btn-light { background: #fff; color: var(--primary); border-color: #fff; }
+.btn-light:hover { background: var(--surface); border-color: var(--surface); }
+
+/* 4. Navbar (Flexbox) */
+.site-header { border-bottom: 1px solid #e4e7eb; }
+.site-header { position: sticky; top: 0; z-index: 10; background: var(--bg); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; padding-bottom: 1rem; }
+.logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
+.nav { display: flex; align-items: center; gap: 2rem; }
+.nav ul { display: flex; gap: 2rem; }
+.nav-toggle { display: none; }
+.nav a { font-weight: 500; color: var(--muted); }
+.nav a:hover { color: var(--primary); }
+
+/* 5. Hero (Grid for columns, Flexbox for buttons) */
+.hero { padding: 5rem 0; }
+.hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.hero h1 { font-size: clamp(2rem, 1.3rem + 3vw, 3rem); }
+.hero p { font-size: 1.15rem; color: var(--muted); }
+.hero-actions { display: flex; gap: 1rem; margin-top: 1.5rem; }
+
+/* 6. Features (Grid for cards, Flexbox inside cards) */
+.features { padding: 5rem 0; background: var(--surface); text-align: center; }
+.features h2 { font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.25rem); }
+.section-intro { color: var(--muted); margin-bottom: 3rem; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); text-align: left; }
+.card { display: flex; flex-direction: column; gap: .5rem; background: #fff; padding: 2rem; border-radius: var(--radius); box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+.card h3 { margin: 0; font-size: 1.25rem; }
+.card p { margin: 0; color: var(--muted); }
+.icon { font-size: 2rem; }
+
+/* 7. Call to action and footer */
+.cta { padding: 4rem 0; background: var(--primary); color: #fff; text-align: center; }
+.cta h2 { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem); margin-bottom: 1.5rem; }
+.site-footer { padding: 1.5rem 0; text-align: center; color: var(--muted); font-size: .9rem; }
+.site-footer p { margin: 0; }
+
+/* 8. Tablet (up to 1023px) */
+@media (max-width: 1023px) {
+  .hero { padding: 3.5rem 0; }
+  .hero-inner { gap: 2.5rem; }
+  .cards { grid-template-columns: repeat(2, 1fr); }
+  .features, .cta { padding: 3.5rem 0; }
+}
+
+/* 9. Mobile (up to 767px) */
+@media (max-width: 767px) {
+  .container { padding: 0 1rem; }
+
+  /* Navbar: hamburger toggle and dropdown panel */
+  .header-inner { position: relative; }
+  .nav-toggle {
+    display: flex; flex-direction: column; justify-content: center; gap: 5px;
+    width: 44px; height: 44px; padding: 10px;
+    background: none; border: 1px solid #e4e7eb; border-radius: 8px; cursor: pointer;
+  }
+  .nav-toggle .bar { display: block; height: 2px; background: var(--text); }
+  .nav {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 1rem;
+    padding: 1rem; background: var(--bg); border-bottom: 1px solid #e4e7eb;
+  }
+  .nav.is-open { display: flex; }
+  .nav ul { flex-direction: column; gap: .75rem; }
+  .nav a:not(.btn) { display: block; padding: .5rem 0; }
+  .nav-cta { text-align: center; }
+
+  /* Hero: single column, text first */
+  .hero { padding: 2.5rem 0; }
+  .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn { text-align: center; }
+
+  /* Cards: single column */
+  .features, .cta { padding: 2.5rem 0; }
+  .section-intro { margin-bottom: 2rem; }
+  .cards { grid-template-columns: 1fr; gap: 1.25rem; }
+  .card { padding: 1.5rem; }
+}
